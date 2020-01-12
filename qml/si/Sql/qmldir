@@ -1,0 +1,5 @@
+module si.sql
+
+MYSQLDriver 1.0 MYSQLDriver.qml
+SqliDriver 1.0 SqliDriver.qml
+SQLiteDriver 1.0 SQLiteDriver.qml

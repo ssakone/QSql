@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/si/Sql/MYSQLDriver.qml</file>
+        <file>qml/si/Sql/qmldir</file>
+        <file>qml/si/Sql/SqliDriver.qml</file>
+        <file>qml/si/Sql/SQLiteDriver.qml</file>
+    </qresource>
+</RCC>
