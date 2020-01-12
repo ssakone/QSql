@@ -26,3 +26,14 @@ Basic example
         }
 
     }
+
+# Features
+
+- Sqlite
+- Mysql
+
+# TO DO
+
+- PostgreSql
+- LocalStorage
+etc..
