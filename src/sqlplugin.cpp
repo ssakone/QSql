@@ -1,4 +1,4 @@
-#include "sqlplugin.h"
+#include "include/SISql/sqlplugin.h"
 
 SqlPlugin::SqlPlugin(QObject *parent) : QObject(parent)
 {

@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import si.Sql 1.0
 
 SqliDriver {
     signal databaseReady(var d)

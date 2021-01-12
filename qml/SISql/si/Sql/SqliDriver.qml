@@ -6,7 +6,7 @@ import QtQuick.Controls.Material 2.12
 import QtQuick.Controls.Material.impl 2.12
 import QtMultimedia 5.12
 
-import SqlDriver 1.0
+import si.Sql 1.0
 
 SqlDriver {
     function register(name,value){
