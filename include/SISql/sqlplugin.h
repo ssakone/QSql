@@ -2,6 +2,7 @@
 #define SQLPLUGIN_H
 
 #include <QObject>
+#include <QtSql>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlRecord>
@@ -11,7 +12,8 @@
 #include <QQmlPropertyMap>
 #include <QQmlListProperty>
 #include <QJsonArray>
-
+#include <QtQml>
+#include <QVector>
 class SqlPlugin : public QObject
 {
     Q_OBJECT

@@ -22,13 +22,11 @@ QString SqlPlugin::driver()
 
 void SqlPlugin::setDriver(QString value)
 {
-    qDebug() << "Setting Driver...";
     _driver = value;
 }
 
 QString SqlPlugin::hostname() const
 {
-    qDebug() << "Setting HostName...";
     return _hostname;
 }
 
@@ -59,7 +57,6 @@ void SqlPlugin::setPassword(QString pass)
 
 void SqlPlugin::open()
 {
-    qDebug() << "Connecting...";
     db = new QSqlDatabase(QSqlDatabase::addDatabase(driver()));
 
     db->setDatabaseName(this->dbName());
@@ -68,9 +65,6 @@ void SqlPlugin::open()
     db->setHostName(_hostname);
 
     _opened = db->open();
-
-    qDebug() << _opened;
-
     query = new QSqlQuery();
     initDB();
 }
@@ -78,29 +72,32 @@ void SqlPlugin::open()
 QString SqlPlugin::execute(QString queryText)
 {
     if(query->exec(queryText)){
-        QString g;
-        //int count = query->record().keyValues().count();
         QSqlRecord r = query->record();
-
-        while (query->next()) {
-              int i = 0;
-              QString field;
-              //QJsonArray arrayy = QJsonArray::fromVariantList(query->record());
-              //qDebug()<< arrayy;
-              while (i<r.count()){
-                  field+=r.fieldName(i)+"::"+query->value(i).toString()+"[SEP]";
-                  i++;
-              }
-              g+=field+"[__]";
-          }
-        return g;
+        QJsonArray arr;
+        QJsonObject obj;
+        if(r.count()>0){
+            while (query->next()) {
+                  int i = 0;
+                  QJsonObject item;
+                  while (i<r.count()){
+                      item.insert(QString(r.fieldName(i)),QJsonValue::fromVariant(query->value(i)));
+                      i++;
+                  }
+                  arr.append(item);
+            }
+            obj.insert("rows", arr);
+        }
+        obj.insert("result",true);
+        return QJsonDocument(obj).toJson();
     }else {
-        return "false";
+        QJsonObject obj;
+        obj.insert("result",false);
+        obj.insert("errorText", query->lastError().text());
+        return QJsonDocument(obj).toJson();
     }
 }
 
 QVariant SqlPlugin::records() const
 {
-    qDebug()<<_records.count();
     return QVariant::fromValue(_records);
 }

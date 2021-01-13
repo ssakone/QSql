@@ -14,42 +14,8 @@ SqlDriver {
     }
 
     function executeSql(commande){
-        var c = db.execute(commande)
-        if(c!=="false"){
-            c = c.toString().split("[__]")
-            c.pop(c.length)
-            var data=[]
-            c.forEach(function(e){
-                var i = {}
-                e = e.split("[SEP]")
-                e.pop(e.length)
-                e.forEach(function(a){
-                    a = a.split("::")
-                    i[a[0]]=a[1]
-                })
-                data.push(i)
-            })
-            function G(d){
-                this.rows =d
-            }
-            G.prototype = {
-                item: function(i) {
-                    return this.rows[i];
-                }
-            }
-            return new G(data)
-        }
-        else{
-            function G(d){
-                this.rows = d
-            }
-            G.prototype = {
-                item: function(i) {
-                    return this.rows[i];
-                }
-            }
-            return new G([])
-        }
+        var c = JSON.parse(db.execute(commande))
+        return c
     }
 
     function transaction(callback){

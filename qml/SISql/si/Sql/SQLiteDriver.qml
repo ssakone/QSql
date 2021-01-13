@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import si.Sql 1.0
 
-SqliDriver {
+SISqliDriver {
     signal databaseReady(var d)
     property alias db:database
     id: database

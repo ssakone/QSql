@@ -3,7 +3,7 @@ import si.Sql 1.0
 
 SqliDriver {
     signal databaseReady(var d)
-    property alias db:database
+    property alias db: database
     id: database
     driver: "QMYSQL"
     username: "root"
@@ -13,8 +13,5 @@ SqliDriver {
         databaseReady(database)
     }
     Component.onCompleted: open()
-
-
-
 }
 
