@@ -1,16 +1,13 @@
 QML2_IMPORT_PATH += \
-        $$PWD/qml
+        $$PWD/qml/SISql
 QML_IMPORT_PATH += \
-        $$PWD/qml
+        $$PWD/qml/SISql
 
 SOURCES += \
     $$PWD/src/sqlplugin.cpp
 
 HEADERS += \
-    $$PWD/src/sqlplugin.h
+    $$PWD/include/SISql/sqlplugin.h
 
 RESOURCES += \
-    $$PWD/qrc.qrc
-
-DISTFILES += \
-    $$PWD/qml/qmldir
+    $$PWD/qml/SISql.qrc
