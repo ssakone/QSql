@@ -17,13 +17,6 @@ Item {
     SISQLiteDriver {
         id: tx
         dbName: control.dBName
-
-        onDatabaseReady:  {
-
-            let data = sql.executeSql("select * from personne limit 0,10")
-            console.log(JSON.stringify(data))
-
-        }
     }
     ListModel {
         id:_model
