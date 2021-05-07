@@ -5,5 +5,8 @@
         <file>SISql/si/Sql/SqliDriver.qml</file>
         <file>SISql/si/Sql/SQLiteDriver.qml</file>
         <file>SISql/qmldir</file>
+        <file>SISql/si/Sql/MysqlModel.qml</file>
+        <file>SISql/si/Sql/SqliteModel.qml</file>
+        <file>SISql/si/Sql/StorageModel.qml</file>
     </qresource>
 </RCC>
