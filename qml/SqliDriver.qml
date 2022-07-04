@@ -1,11 +1,5 @@
-import QtQuick 2.13
-import QtQuick.Controls 2.13
-
-import QtQuick.Controls.impl 2.12
-import QtQuick.Controls.Material 2.12
-import QtQuick.Controls.Material.impl 2.12
-import QtMultimedia 5.12
-
+pragma Singleton
+import QtQuick
 import QSql
 
 SqlDriver {
@@ -37,5 +31,5 @@ SqlDriver {
     }
     id: db
     dbName: ":memory:"
-    driver: "QPSQL"
+    driver: "QSQLITE"
 }
