@@ -4,7 +4,7 @@
 ```cmake
 add_subdirectory(QSql) # in your project file CMakeFiles.txt
 ... 
-target_link_libraries(... QSql)
+target_link_libraries(... QSqlplugin)
 ```
  - In main cpp
 
