@@ -1,64 +1,22 @@
 cmake_minimum_required(VERSION 3.14)
 
-project(SISql LANGUAGES CXX)
+project(QSql LANGUAGES CXX)
 
-find_package(Qt5 REQUIRED COMPONENTS
-  Core
-  Gui
-  Qml
-  Quick
-  QuickControls2
-  Svg
-  Sql
-  Xml
-  QuickCompiler
+find_package(Qt6 COMPONENTS Sql REQUIRED)
+
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/mysql)
+
+qt6_add_library(QSql STATIC)
+qt6_add_qml_module(QSql
+    URI QSql
+    VERSION 1.0
+    QML_FILES
+        qml/SqliDriver.qml
+    SOURCES
+        src/sqlplugin.h
+        src/sqlplugin.cpp
 )
+message(STATUS ${CMAKE_CURRENT_SOURCE_DIR}/src/mysql)
 
-set(HEADERS
-    include/SISql/sqlplugin.h
-)
-
-set(SOURCES
-  src/sqlplugin.cpp
-  qml/SISql.qrc
-)
-
-
-list(APPEND QML_IMPORT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/qml/SISql)
-
-list(REMOVE_DUPLICATES QML_IMPORT_PATH)
-
-set(QML_IMPORT_PATH ${QML_IMPORT_PATH}
-    CACHE STRING "Qt Creator 4.1 extra qml import paths"
-    FORCE
-)
-
-list(APPEND QML2_IMPORT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/qml/SISql)
-
-list(REMOVE_DUPLICATES QML2_IMPORT_PATH)
-
-set(QML_IMPORT_PATH ${QML2_IMPORT_PATH}
-    CACHE STRING "Qt Creator 4.1 extra qml import paths"
-    FORCE
-)
-
-
-qtquick_compiler_add_resources(SISQL_QML_RES qml/SISql.qrc)
-
-add_library(SISql STATIC ${HEADERS} ${SOURCES} ${SISQL_QML_RES})
-
-
-target_compile_definitions(SISql PUBLIC)
-target_include_directories(SISql PUBLIC include)
-
-target_link_libraries(SISql PUBLIC
-  Qt::Core
-  Qt::Gui
-  Qt::Svg
-  Qt::Sql
-  Qt::Xml
-  Qt::Qml
-  Qt::Quick
-  Qt::QuickControls2
-)
-
+target_link_libraries(QSql
+    PRIVATE Qt::Sql libmysql.dll libmysql.lib)

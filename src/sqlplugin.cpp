@@ -1,4 +1,4 @@
-#include "include/SISql/sqlplugin.h"
+#include "sqlplugin.h"
 
 SqlPlugin::SqlPlugin(QObject *parent) : QObject(parent)
 {
@@ -65,35 +65,47 @@ void SqlPlugin::open()
     db->setHostName(_hostname);
 
     _opened = db->open();
+    if (_opened) {
+        qDebug() << "open";
+    } else {
+        qDebug() << "not open" << driver();
+    }
     query = new QSqlQuery();
     initDB();
 }
 
-QString SqlPlugin::execute(QString queryText)
+QMap<QString, QVariant> SqlPlugin::execute(QString queryText)
 {
-    if(query->exec(queryText)){
+    if (query->exec(queryText)) {
         QSqlRecord r = query->record();
-        QJsonArray arr;
-        QJsonObject obj;
-        if(r.count()>0){
+        QList<QVariant> arr;
+        QMap<QString, QVariant> obj;
+        if (r.count() > 0) {
             while (query->next()) {
-                  int i = 0;
-                  QJsonObject item;
-                  while (i<r.count()){
-                      item.insert(QString(r.fieldName(i)),QJsonValue::fromVariant(query->value(i)));
-                      i++;
-                  }
-                  arr.append(item);
+                QMap<QString, QVariant> item;
+                for (int i = 0; i < r.count(); i++) {
+                    item[QString(r.fieldName(i))] = query->value(i);
+                }
+                arr.append(item);
             }
-            obj.insert("rows", arr);
+            obj.insert("datas", arr);
         }
-        obj.insert("result",true);
-        return QJsonDocument(obj).toJson();
-    }else {
-        QJsonObject obj;
-        obj.insert("result",false);
+
+        QVariant last = query->lastInsertId();
+
+        if (last.isValid()) {
+            obj.insert("lastInsertId", last);
+        }
+
+        obj.insert("status", true);
+        return obj;
+    } else {
+        QMap<QString, QVariant> obj;
+        obj.insert("status", false);
         obj.insert("errorText", query->lastError().text());
-        return QJsonDocument(obj).toJson();
+        QList<QVariant> l;
+        l.append(QVariant());
+        return obj;
     }
 }
 
