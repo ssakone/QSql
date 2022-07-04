@@ -9,7 +9,7 @@ target_link_libraries(... QSql)
  - In main cpp
 
 ```c++
-#include <QSql/include/SISql/sqlplugin.h>
+#include <QSql/include/sqlplugin.h>
 ...
 qmlRegisterType<SqlPlugin>("QSql",1,0,"SqlDriver"); // insert it after engine declaration
 ```
