@@ -6,13 +6,9 @@ import QtQuick.Controls.Material 2.12
 import QtQuick.Controls.Material.impl 2.12
 import QtMultimedia 5.12
 
-import SISql
+import QSql
 
 SqlDriver {
-    function register(name,value){
-        Object.defineProperty(db,name,{value:value})
-    }
-
     function executeSql(commande){
         return new Promise(function(resolve, reject){
             let data = db.execute(commande)
