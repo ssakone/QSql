@@ -66,7 +66,7 @@ void SqlPlugin::open()
 
     _opened = db->open();
     if (_opened) {
-        qDebug() << "open";
+        emit databaseOpened();
     } else {
         qDebug() << "not open" << driver();
     }

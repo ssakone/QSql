@@ -24,7 +24,6 @@ class SqlPlugin : public QObject
     Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
     Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
     Q_PROPERTY(QString driver READ driver WRITE setDriver NOTIFY driverChanged)
-    Q_PROPERTY(QVariant records READ   records NOTIFY recordsChanged)
 public:
 
     explicit SqlPlugin(QObject *parent = nullptr);
@@ -49,7 +48,6 @@ public:
 
     bool initDB(){
         if(_opened){
-            emit databaseOpened();
             return true;
         }
         return _opened;
