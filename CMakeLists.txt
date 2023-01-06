@@ -14,7 +14,6 @@ qt6_add_qml_module(QSql
         src/sqlplugin.h
         src/sqlplugin.cpp
 )
-message(STATUS ${CMAKE_CURRENT_SOURCE_DIR}/lib/mysql)
 
 target_link_libraries(QSql
     PRIVATE Qt::Sql)
