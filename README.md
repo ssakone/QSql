@@ -13,3 +13,4 @@ target_link_libraries(... QSqlplugin)
 ...
 qmlRegisterType<SqlPlugin>("QSql",1,0,"SqlDriver"); // insert it after engine declaration
 ```
+
