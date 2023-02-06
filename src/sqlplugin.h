@@ -56,9 +56,6 @@ public:
     Q_INVOKABLE void open();
     Q_INVOKABLE QMap<QString, QVariant> execute(QString queryText);
     Q_INVOKABLE QVariant records() const;
-    Q_INVOKABLE static void run(){
-        qDebug ()<<"Cool";
-    }
 signals:
     void dbNameChanged();
     void databaseOpened();
