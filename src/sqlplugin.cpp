@@ -36,6 +36,7 @@ void SqlPlugin::open() {
   } else {
     qDebug() << "not open" << driver();
   }
+
   query = new QSqlQuery();
   initDB();
 }

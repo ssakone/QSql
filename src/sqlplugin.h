@@ -53,6 +53,10 @@ public:
         return _opened;
     }
 
+    void close() {
+        db->close();
+    }
+
     Q_INVOKABLE void open();
     Q_INVOKABLE QMap<QString, QVariant> execute(QString queryText);
     Q_INVOKABLE QVariant records() const;
