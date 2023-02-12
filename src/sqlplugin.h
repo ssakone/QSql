@@ -53,9 +53,7 @@ public:
         return _opened;
     }
 
-    void close() {
-        db->close();
-    }
+    void close();
 
     Q_INVOKABLE void open();
     Q_INVOKABLE QMap<QString, QVariant> execute(QString queryText);

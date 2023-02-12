@@ -22,6 +22,11 @@ QString SqlPlugin::password() const { return _password; }
 
 void SqlPlugin::setPassword(QString pass) { _password = pass; }
 
+void SqlPlugin::close()
+{
+    db->close();
+}
+
 void SqlPlugin::open() {
   db = new QSqlDatabase(QSqlDatabase::addDatabase(driver()));
 
